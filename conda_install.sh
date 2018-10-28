@@ -3,7 +3,11 @@
 # Help messages:
 usage="$(basename "$0") [-h] -- program to install conda packages based on requirements.txt file.
 
-where:
+Use the following commenting line:
+# -c conda-forge
+to ask to install the following package from conda-forge channel.
+
+Arguments:
     -h  show this help text"
 
 seed=42
