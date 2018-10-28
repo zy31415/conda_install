@@ -32,10 +32,22 @@ shift $((OPTIND - 1))
 
 # The main program starts from here:
 while read line; do
+
+  # Recognize commenting line:
+  # # -c conda-forge
+  # so that the following package will be installed from the above channel.
   if [[ ${line} =~ ^\#[[:space:]]+-c[[:space:]]+conda-forge ]];then
     chanel=${line:1}
+
+  # Ignore commenting lines.
   elif [[ ${line} =~ ^\# ]];then
     continue
+
+  # Ignore empty lines:
+  elif [[ ${line} =~ [[:space]]* ]];then
+    continue
+
+  # Install a package. Install use -c conda-forge is the variable chanel is defined.
   else
     echo "conda install $chanel ${line}"
     conda install ${chanel} ${line}
